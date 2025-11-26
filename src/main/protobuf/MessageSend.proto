@@ -1,0 +1,29 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option java_package = "org.markus.rhserver.protobuf";
+
+enum MessageType{
+  TEXT = 0;
+  FILE = 1;
+  IMAGE = 2;
+  AUDIO = 3;
+  VIDEO = 4;
+  FILE_SUFFIX = 5;
+  APPLY = 6;
+  OFFLINE = 7;
+  HEARTBEAT = 8;
+}
+
+enum MessageTo{
+  USER = 0;
+  GROUP = 1;
+}
+
+message MessageSend{
+  string sender = 1;
+  string receiver = 2;
+  MessageType type = 3;
+  bytes content = 4;
+  MessageTo to = 5;
+}

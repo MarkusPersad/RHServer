@@ -1,1 +1,93 @@
-spring.application.name=RHServer
+server:
+  address: 127.0.0.1
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/jwt,application/json
+spring:
+  validation:
+    method:
+      adapt-constraint-violations: true
+  main:
+    allow-bean-definition-overriding: true
+  threads:
+    virtual:
+      enabled: true
+  application:
+    name: RHServer
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123456
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+      timeout: 1000
+      lettuce:
+        pool:
+          enabled: true
+          max-active: 8
+          max-idle: 8
+          max-wait: -1ms
+          min-idle: 0
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: markus
+    password: 123456
+    dynamic: true
+    connection-timeout: 1000
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000ms
+        max-attempts: 3
+      mandatory: true
+      exchange:  "rh.chat"
+    listener:
+      type: direct
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+jimmer:
+  show-sql: true
+  dialect: org.babyfish.jimmer.sql.dialect.PostgresDialect
+  pretty-sql: true
+  database-validation-mode: error
+  language: java
+
+sa-token:
+  token-name: token
+  timeout: 2592000
+  token-style: token
+  jwt-secret-key: defgdtgdc
+  is-concurrent: false
+  is-share: true
+
+logging:
+  level:
+    org.babyfish.jimmer.sql: DEBUG
+    org.babyfish.jimmer: DEBUG
+    root: info
+    web: info
+  file:
+    name: ./logs/RHServer.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 10MB
+      total-size-cap: 1GB
+argon2:
+  iterations: 2
+  memory: 1024
+  parallelism: 1
+ws-netty:
+  port: 8081
+  path: /ws
+  heartbeat-interval: 20

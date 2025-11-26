@@ -1,0 +1,17 @@
+export org.markus.rhserver.model.Group
+    -> package org.markus.rhserver.entity.dto
+
+input CreateGroupInput{
+    #allScalars
+        - uuid
+        - createAt
+        - ownerId
+        - version
+}
+input GroupSearchInput{
+    info : String
+}
+input AcceptGroupInput{
+    groupId : String
+    applyId : String
+}

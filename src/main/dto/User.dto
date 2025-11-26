@@ -1,11 +1,29 @@
 export org.markus.rhserver.model.Users
     -> package org.markus.rhserver.entity.dto
+import  jakarta.validation.constraints.Size
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotBlank
 
 input RegisterInput {
-    #allScalars
-        - createAt
-        - updateAt
-        - uuid
-        - deleteAt
-        - version
+    @Email(message = "邮箱格式错误")
+    email
+    @Size(min = 3, max = 20, message = "用户名长度必须在2-20之间")
+    userName
+    @Size(min = 6, max = 20, message = "密码长度必须在6-20之间")
+    password
+    avatar
+}
+
+input LoginInput{
+    @Email(message = "邮箱格式错误")
+    email
+    @Size(min = 6, max = 20, message = "密码长度必须在6-20之间")
+    password
+}
+input GetUserInfoInput{
+    @NotBlank
+    info : String
+}
+specification UserInfoSpecification{
+    like/i(userName,email) as searchInfo
 }

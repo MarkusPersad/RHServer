@@ -1,4 +1,10 @@
 package org.markus.rhserver.entity.vo;
 
-public record UserInfo() {
+import java.util.UUID;
+
+public record UserInfo(
+        UUID userId,
+        String userName,
+        String email,
+        String token) {
 }
