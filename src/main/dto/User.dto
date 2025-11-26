@@ -1,0 +1,11 @@
+export org.markus.rhserver.model.Users
+    -> package org.markus.rhserver.entity.dto
+
+input RegisterInput {
+    #allScalars
+        - createAt
+        - updateAt
+        - uuid
+        - deleteAt
+        - version
+}
