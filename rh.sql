@@ -1,4 +1,3 @@
-drop table if exists "user";
 create table users
 (
     uuid       uuid                                   not null
@@ -14,7 +13,7 @@ create table users
     create_at  timestamp with time zone default now() not null,
     update_at  integer,
     delete_at  timestamp with time zone,
-    version    integer                      not null,
+    version    integer                                not null,
     avatar     varchar,
     last_login timestamp with time zone,
     last_off   timestamp with time zone
@@ -47,13 +46,17 @@ comment on column users.last_off is '最后离线时间';
 alter table users
     owner to postgres;
 
+
+
 create table role_permission
 (
-    uuid    uuid                                        not null
+    uuid      uuid                                                         not null
         constraint role_permission_uuid
             primary key,
-    role    varchar default 'NORMAL'::character varying not null,
-    version integer default 0                           not null
+    role      varchar                  default 'NORMAL'::character varying not null,
+    version   integer                  default 0                           not null,
+    create_at timestamp with time zone default now()                       not null,
+    update_at timestamp with time zone
 );
 
 comment on table role_permission is '用户权限表';
@@ -64,12 +67,16 @@ comment on column role_permission.role is '角色';
 
 comment on column role_permission.version is '版本号';
 
+comment on column role_permission.create_at is '创建时间';
+
+comment on column role_permission.update_at is '更新时间';
+
 alter table role_permission
     owner to postgres;
 
 create table friend
 (
-    id      bigserial                                   not null
+    uuid      uuid                                   not null
         constraint friend_pk_uuid
             primary key,
     chat_id   varchar                                not null,
@@ -79,7 +86,8 @@ create table friend
     create_at timestamp with time zone default now() not null,
     update_at timestamp with time zone,
     delete_at timestamp with time zone,
-    version   integer                  default 0     not null
+    version   integer                  default 0     not null,
+    "group"   boolean                  default false not null
 );
 
 comment on table friend is '好友表';
@@ -101,6 +109,8 @@ comment on column friend.update_at is '更新时间';
 comment on column friend.delete_at is '拉黑时间';
 
 comment on column friend.version is '版本号';
+
+comment on column friend."group" is '是否是群组';
 
 alter table friend
     owner to postgres;
@@ -154,7 +164,8 @@ create table "group"
     owner_id   uuid                                   not null,
     notice     varchar,
     version    integer                  default 0     not null,
-    create_at  timestamp with time zone default now() not null
+    create_at  timestamp with time zone default now() not null,
+    avatar     varchar
 );
 
 comment on table "group" is '群组表';
@@ -170,6 +181,8 @@ comment on column "group".notice is '群公告';
 comment on column "group".version is '版本号';
 
 comment on column "group".create_at is '创建时间';
+
+comment on column "group".avatar is '群头像';
 
 alter table "group"
     owner to postgres;
