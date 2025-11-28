@@ -28,17 +28,17 @@
     </scm>
     <properties>
         <java.version>25</java.version>
-        <jimmer.version>0.9.116</jimmer.version>
+        <jimmer.version>0.9.117</jimmer.version>
         <satoken.version>1.44.0</satoken.version>
         <hutool.version>5.8.41</hutool.version>
         <redisson.version>3.52.0</redisson.version>
         <netty.version>4.2.7.Final</netty.version>
-        <caffeine.version>3.2.2</caffeine.version>
+        <caffeine.version>3.2.3</caffeine.version>
         <argon2.version>2.12</argon2.version>
-        <protobuf.version>4.32.1</protobuf.version>
+        <protobuf.version>4.33.1</protobuf.version>
         <minio.version>8.6.0</minio.version>
-        <commons-lang3.version>3.19.0</commons-lang3.version>
-        <logback.version>1.5.20</logback.version>
+        <commons-lang3.version>3.20.0</commons-lang3.version>
+        <logback.version>1.5.21</logback.version>
     </properties>
     <dependencyManagement>
         <dependencies>
